@@ -1,7 +1,7 @@
 jest.useFakeTimers();
-
 // include this section and the NativeAnimatedHelper section for mocking react-native-reanimated
 jest.mock('react-native-reanimated', () => {
+  // eslint-disable-next-line global-require
   const Reanimated = require('react-native-reanimated/mock');
 
   // The mock for `call` immediately calls the callback which is incorrect
