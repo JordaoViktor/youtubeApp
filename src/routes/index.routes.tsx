@@ -17,6 +17,7 @@ function HomeScreen() {
       <Text>Home Screen</Text>
       <TouchableOpacity
         style={{width: 300, height: 100, backgroundColor: 'purple'}}
+        testID="test1"
         onPress={() => {
           navigation.navigate('DetailsScreen');
         }}>
@@ -39,6 +40,7 @@ function DetailsScreen() {
       <Text>Details Screen</Text>
       <TouchableOpacity
         style={{width: 300, height: 100, background: 'purple'}}
+        testID="test2"
         onPress={() => {
           navigation.navigate('Home');
         }}>
@@ -47,10 +49,11 @@ function DetailsScreen() {
     </View>
   );
 }
+
 const Routes = () => {
   return (
     <NavigationContainer>
-      <Navigator>
+      <Navigator initialRouteName="Home">
         <Screen name="Home" component={HomeScreen} />
         <Screen name="DetailsScreen" component={DetailsScreen} />
       </Navigator>
@@ -58,4 +61,4 @@ const Routes = () => {
   );
 };
 
-export {Routes};
+export {Routes, HomeScreen, DetailsScreen};
