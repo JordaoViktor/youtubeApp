@@ -1,7 +1,10 @@
-jest.useFakeTimers();
+import { setupServer } from 'msw/lib/node';
+import { handlers } from '../__mocks__/handlers.ts';
 
+jest.useFakeTimers();
 // include this section and the NativeAnimatedHelper section for mocking react-native-reanimated
 jest.mock('react-native-reanimated', () => {
+  // eslint-disable-next-line global-require
   const Reanimated = require('react-native-reanimated/mock');
 
   // The mock for `call` immediately calls the callback which is incorrect
@@ -13,3 +16,4 @@ jest.mock('react-native-reanimated', () => {
 
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+export const server = setupServer(...handlers);
