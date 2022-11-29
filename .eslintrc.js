@@ -29,7 +29,6 @@ module.exports = {
     },
     'import/resolver': {
       typescript: {
-        alwaysTryTypes: true,
 
       },
 
@@ -37,7 +36,7 @@ module.exports = {
         paths: ['src'],
         extensions: ['.js', '.ts', '.d.ts', '.tsx'],
       },
-      caseSensitive: false,
+
     },
   },
   rules: {
