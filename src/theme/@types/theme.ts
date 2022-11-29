@@ -2,7 +2,7 @@ export interface ColorTheme {
   primary: string;
   secondary: string;
   surface: string;
-  onSurface: string;
+  detail: string;
   background: string;
 }
 export interface SpacingTheme {

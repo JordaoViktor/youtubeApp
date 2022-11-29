@@ -4,12 +4,8 @@ import { TouchableOpacity, Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeScreen } from '../screens/Home';
-
-export type RootStackParamListType = {
-  Home: undefined;
-  DetailsScreen: undefined;
-};
+import { HomeScreen } from '@screens/Home';
+import { type RootStackParamListType } from '../@types/navigation';
 
 type HomeScreenProps = StackNavigationProp<RootStackParamListType, 'Home'>;
 

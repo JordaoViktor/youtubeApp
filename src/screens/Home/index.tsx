@@ -6,10 +6,11 @@ import {
 import { useNavigation } from '@react-navigation/native';
 
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamListType } from '../../routes/index.routes';
-import { useThemeAwareObject } from '../../hooks/style/useThemeAwareObject';
+
+import { useThemeAwareObject } from '@hooks/style/useThemeAwareObject';
 
 import { createStyles } from './styles';
+import { RootStackParamListType } from '../../@types/navigation';
 
 type DetailsScreenProps = StackNavigationProp<
   RootStackParamListType,
