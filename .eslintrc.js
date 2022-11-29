@@ -7,6 +7,7 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
+    'plugin:import/typescript',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -19,15 +20,28 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
+    'import',
+
   ],
   settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
     'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      typescript: {
+        alwaysTryTypes: true,
+
       },
+
+      node: {
+        paths: ['src'],
+        extensions: ['.js', '.ts', '.d.ts', '.tsx'],
+      },
+      caseSensitive: false,
     },
   },
   rules: {
+    'import/no-unresolved': 'off',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
@@ -43,6 +57,10 @@ module.exports = {
         args: 'none',
       },
     ],
+
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
+    'react/jsx-props-no-spreading': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -53,9 +71,7 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
-    'react/jsx-props-no-spreading': 'off',
+
   },
 
 };

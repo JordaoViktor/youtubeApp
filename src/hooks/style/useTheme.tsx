@@ -50,12 +50,12 @@ export const ThemeProvider = memo<ThemeProps>((props: ThemeProps) => {
     };
     return value;
   }, [theme, ToggleThemeCallback]);
-  // Render our context provider by passing it the value to provide
+
   return (
     <Context.Provider value={MemoizedValue}>
       {props.children}
     </Context.Provider>
   );
 });
-// Creating a custom context consumer hook for function components
+
 export const useTheme = () => React.useContext(Context);
