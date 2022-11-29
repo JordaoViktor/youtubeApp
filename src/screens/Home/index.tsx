@@ -5,6 +5,7 @@ import {
 import { FlashList } from '@shopify/flash-list';
 import { useThemeAwareObject } from '@hooks/style/useThemeAwareObject';
 
+import { Header } from '@components/Header';
 import { createStyles } from './styles';
 
 const DATA = [
@@ -23,11 +24,13 @@ export const HomeScreen = () => {
     <View
       style={Styles.container}
     >
-      <Text>Home Screen</Text>
-      <View style={{ width: 300, height: 500, backgroundColor: 'red' }}>
+      <Header title="My Videos" />
+      <View style={Styles.flatlistWrapper}>
         <FlashList
           data={DATA}
-          renderItem={({ item }) => <Text>{item.title}</Text>}
+          renderItem={({ item }) => (
+            <Text>{item.title}</Text>
+          )}
           estimatedItemSize={100}
         />
       </View>

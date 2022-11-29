@@ -4,15 +4,23 @@ import { Theme } from '../../theme/@types/theme';
 export const createStyles = (theme: Theme) => {
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      justifyContent: 'flex-start',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: theme.color.detail,
-    },
-    flatlistWrapper: {
       width: '100%',
-      height: '100%',
-      backgroundColor: theme.color.secondary,
+      height: 60,
+      backgroundColor: theme.color.detail,
+      paddingHorizontal: 20,
+    },
+    image: {
+      backgroundColor: 'blue',
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+    },
+    title: {
+      fontWeight: '300',
+      fontSize: 18,
     },
   });
   return styles;
