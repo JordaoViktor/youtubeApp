@@ -33,7 +33,7 @@ export const LoginScreen = () => {
       <View style={Styles.signinWrapper}>
         <Button
           text="Sign in"
-          onPress={() => { console.log('hello button'); }}
+          onPress={() => { navigation.navigate('Home'); }}
         />
       </View>
     </View>
