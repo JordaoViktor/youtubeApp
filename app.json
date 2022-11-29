@@ -1,4 +1,7 @@
 {
   "name": "youtubeApp",
-  "displayName": "youtubeApp"
+  "displayName": "youtubeApp",
+  "expo": {
+    "scheme": "mycoolredirect"
+  }
 }
