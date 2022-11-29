@@ -9,7 +9,7 @@ const App = () => (
   <GestureHandlerRootView style={{ flex: 1 }}>
     <ThemeProvider initial={DEFAULT_LIGHT_THEME}>
       <SafeAreaView style={styles.mainWrapper}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar barStyle="dark-content" />
         <Routes />
       </SafeAreaView>
     </ThemeProvider>
