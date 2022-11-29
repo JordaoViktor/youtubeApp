@@ -18,7 +18,13 @@ type ButtonProps = WithChildren<{
 }>
 
 export const Button = ({
-  children, active, pressableTestID, onPress, buttonStyle, textStyle, text,
+  children,
+  active,
+  pressableTestID,
+  onPress,
+  buttonStyle,
+  textStyle,
+  text,
 }:ButtonProps) => {
   const Styles = useThemeAwareObject(createStyles);
 
@@ -38,4 +44,5 @@ export const Button = ({
 Button.defaultProps = {
   active: true,
   pressableTestID: 'ButtonTestID',
+  children: null,
 };
