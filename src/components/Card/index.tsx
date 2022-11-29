@@ -89,6 +89,7 @@ CardComponent.defaultProps = {
   channelImageTestID: 'CardChannelImageTestID',
   cardTextInfoTestID: 'Card-Text-Information',
   cardTextTitleTestID: 'Card-Text-Title',
+  onPress: () => {},
 };
 
 export const Card = memo(CardComponent);
