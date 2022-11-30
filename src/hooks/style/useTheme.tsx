@@ -3,11 +3,10 @@ import React, {
 } from 'react';
 import {
   DEFAULT_DARK_THEME,
-  DEFAULT_DARK_THEME_ID,
 } from '../../theme/darkMode';
+
 import {
   DEFAULT_LIGHT_THEME,
-  DEFAULT_LIGHT_THEME_ID,
 } from '../../theme/lightMode';
 import { Theme } from '../../theme/@types/theme';
 import { WithChildren } from '../../@types/utils';
