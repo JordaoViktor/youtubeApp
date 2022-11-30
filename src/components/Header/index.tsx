@@ -33,7 +33,7 @@ export const Header = ({
   const Styles = useThemeAwareObject(createStyles);
   const navigation = useNavigation();
 
-  const goBack = () => useCallback(() => { navigation.goBack(); }, [navigation]);
+  const goBack = useCallback(() => { navigation.goBack(); }, [navigation]);
 
   return (
     <View style={Styles.container}>

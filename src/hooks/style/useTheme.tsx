@@ -28,19 +28,20 @@ type ThemeProps = WithChildren<{
   initial: Theme,
 }>
 
+type ThemeTypes = {
+ [ DEFAULT_THEME_ID: string]: () => Theme,
+}
+
+const themeTypes: ThemeTypes = {
+  DEFAULT_LIGHT_THEME_ID: () => DEFAULT_DARK_THEME,
+  DEFAULT_DARK_THEME_ID: () => DEFAULT_LIGHT_THEME,
+};
+
 export const ThemeProvider = memo<ThemeProps>((props: ThemeProps) => {
   const [theme, setTheme] = useState<Theme>(props.initial);
 
   const ToggleThemeCallback = useCallback(() => {
-    setTheme((currentTheme) => {
-      if (currentTheme.id === DEFAULT_LIGHT_THEME_ID) {
-        return DEFAULT_DARK_THEME;
-      }
-      if (currentTheme.id === DEFAULT_DARK_THEME_ID) {
-        return DEFAULT_LIGHT_THEME;
-      }
-      return currentTheme;
-    });
+    setTheme((currentTheme) => themeTypes[currentTheme.id]());
   }, []);
 
   const MemoizedValue = useMemo(() => {

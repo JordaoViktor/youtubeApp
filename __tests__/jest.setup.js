@@ -1,6 +1,7 @@
 import '@testing-library/jest-native/extend-expect';
 
 jest.useFakeTimers();
+
 // include this section and the NativeAnimatedHelper section for mocking react-native-reanimated
 jest.mock('react-native-reanimated', () => {
   // eslint-disable-next-line global-require

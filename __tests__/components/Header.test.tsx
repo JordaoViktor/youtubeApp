@@ -13,22 +13,12 @@ describe('<Header/>', () => {
       return {
         __esModule: true,
         ...originalModule,
-        useFocusEffect: jest.fn(),
-        useRoute: () => ({
-          params: {
-          },
-        }),
-        useIsFocused: jest.fn(),
-        createAppContainer: jest.fn(),
         useNavigation: () => ({
-          popToTop: jest.fn(),
-          navigate: jest.fn(),
-          dispatch: jest.fn(),
-          addListener: jest.fn(),
           goBack: jest.fn(),
         }),
       };
     });
+
     const component = (
       <NavigationContainer>
         <Header
