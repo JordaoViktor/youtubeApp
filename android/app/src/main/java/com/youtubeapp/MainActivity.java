@@ -1,4 +1,4 @@
-package com.youtubeapp;
+package com.youtubeAppExemple;
 import expo.modules.ReactActivityDelegateWrapper;
 
 import com.facebook.react.ReactActivity;
@@ -14,7 +14,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "youtubeApp";
+    return "youtubeAppExemple";
   }
 
   @Override
