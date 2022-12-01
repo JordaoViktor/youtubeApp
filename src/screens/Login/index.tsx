@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import {
+  Platform,
   Text, View,
 } from 'react-native';
 
@@ -15,7 +16,7 @@ import { useThemeAwareObject } from '@hooks/style/useThemeAwareObject';
 
 import { Button } from '@components/Button';
 import YoutubeLogo from '@assets/svg/YouTube-Logo.svg';
-import { CLIENT_ID } from '@services/api';
+
 import { createStyles } from './styles';
 import { RootStackParamListType } from '../../@types/navigation';
 
@@ -23,6 +24,9 @@ type DetailsScreenProps = StackNavigationProp<
   RootStackParamListType,
   'Home'
 >;
+const { CLIENT_ID_IOS, CLIENT_ID_ANDROID } = process.env;
+
+const PlatformVerification = Platform.OS === 'ios' ? CLIENT_ID_IOS : CLIENT_ID_ANDROID;
 
 export const LoginScreen = () => {
   const navigation = useNavigation<DetailsScreenProps>();
@@ -30,7 +34,7 @@ export const LoginScreen = () => {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId: CLIENT_ID,
+      webClientId: PlatformVerification,
     });
   }, []);
 
