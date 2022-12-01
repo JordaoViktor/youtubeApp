@@ -1,4 +1,4 @@
-package com.youtubeapp.newarchitecture.modules;
+package com.youtubeAppExemple.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

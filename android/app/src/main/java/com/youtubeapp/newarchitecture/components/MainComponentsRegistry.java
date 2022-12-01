@@ -1,4 +1,4 @@
-package com.youtubeapp.newarchitecture.components;
+package com.youtubeAppExemple.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
