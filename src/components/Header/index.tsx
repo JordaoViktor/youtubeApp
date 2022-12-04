@@ -10,6 +10,7 @@ import { useThemeAwareObject } from '@hooks/style/useThemeAwareObject';
 import { useNavigation } from '@react-navigation/native';
 
 import Arrow from '@assets/svg/arrow.svg';
+
 import { WithChildren } from '../../@types/utils';
 import { createStyles } from './styles';
 
@@ -19,6 +20,7 @@ type HeaderProps = WithChildren<{
   headerArrowTestID:string;
   headerTitleTestID:string;
   headerImageTestID:string;
+  handleArrowPress: () => void
 }>
 
 export const Header = ({
@@ -28,11 +30,15 @@ export const Header = ({
   headerArrowTestID,
   headerTitleTestID,
   headerImageTestID,
+  handleArrowPress,
 }:HeaderProps) => {
   const Styles = useThemeAwareObject(createStyles);
   const navigation = useNavigation();
 
-  const goBack = () => navigation.goBack();
+  const goBack = () => {
+    handleArrowPress();
+    navigation.goBack();
+  };
 
   return (
     <View style={Styles.container}>

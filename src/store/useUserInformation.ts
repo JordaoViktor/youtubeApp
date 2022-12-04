@@ -3,7 +3,7 @@ import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface UseUserInformationProps {
-  userInfo: User
+  userInfo: User;
 }
 
 export const useUserInformation = create(persist(() => ({

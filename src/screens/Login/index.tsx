@@ -25,15 +25,15 @@ RootStackParamListType,
 >;
 
 const handleSignIn = async () => {
-  // await GoogleSignin.revokeAccess();
-  // await GoogleSignin.signOut();
-
+  await GoogleSignin.revokeAccess();
+  await GoogleSignin.signOut();
   await GoogleSignin.hasPlayServices();
 
   const googleUserInfo = await GoogleSignin.signIn();
 
   const googleCredential = auth.GoogleAuthProvider.credential(googleUserInfo?.idToken);
   auth().signInWithCredential(googleCredential);
+
   useUserInformation.setState({ userInfo: googleUserInfo });
 
   return googleUserInfo;
@@ -51,9 +51,11 @@ export const LoginScreen = () => {
     if (userInfo?.idToken) {
       navigate.navigate('Home');
     }
-  }, [userInfo?.idToken]);
+  }, [userInfo?.idToken, userInfo]);
 
-  useEffect(() => { onSigned(); }, [userInfo?.idToken]);
+  useEffect(() => {
+    onSigned();
+  }, [onSigned]);
 
   return (
     <View

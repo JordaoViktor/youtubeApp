@@ -9,6 +9,7 @@ import { Header } from '@components/Header';
 import { Card } from '@components/Card';
 import JordaoVictor from '@assets/images/JordaoVictor.jpg';
 import { useUserInformation } from '@store/useUserInformation';
+import { User } from '@react-native-google-signin/google-signin';
 import { createStyles } from './styles';
 
 const DATA = [
@@ -62,7 +63,11 @@ export const HomeScreen = () => {
     <View
       style={Styles.container}
     >
-      <Header title="My Videos" sourceImage={userInfo?.user?.photo || undefined} />
+      <Header
+        title="My Videos"
+        sourceImage={userInfo?.user?.photo || undefined}
+        handleArrowPress={() => { useUserInformation.setState({ userInfo: {} as User }); }}
+      />
       <View style={Styles.flatlistWrapper}>
         <FlashList
           data={DATA}
