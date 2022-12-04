@@ -15,6 +15,7 @@ import { useThemeAwareObject } from '@hooks/style/useThemeAwareObject';
 import { Button } from '@components/Button';
 import YoutubeLogo from '@assets/svg/YouTube-Logo.svg';
 
+import { userInfo } from 'os';
 import { createStyles } from './styles';
 
 import { RootStackParamListType } from '../../@types/navigation';
@@ -25,17 +26,21 @@ RootStackParamListType,
 >;
 
 const handleSignIn = async () => {
-  await GoogleSignin.revokeAccess();
-  await GoogleSignin.signOut();
-  await GoogleSignin.hasPlayServices();
+  // await GoogleSignin.revokeAccess();
+  // await GoogleSignin.signOut();
 
+  const googleUserTokens = await GoogleSignin.getTokens();
   const googleUserInfo = await GoogleSignin.signIn();
+  // await GoogleSignin.addScopes({ scopes: ['https://www.googleapis.com/auth/youtube'] });
 
   const googleCredential = auth.GoogleAuthProvider.credential(googleUserInfo?.idToken);
   auth().signInWithCredential(googleCredential);
 
-  useUserInformation.setState({ userInfo: googleUserInfo });
-
+  useUserInformation.setState({
+    userInfo: googleUserInfo,
+    userTokens: googleUserTokens,
+  });
+  console.log('haha', googleUserInfo);
   return googleUserInfo;
 };
 
@@ -46,7 +51,10 @@ export const LoginScreen = () => {
   const userInfo = useUserInformation(
     (state) => state.userInfo,
   );
-
+  const userTokens = useUserInformation(
+    (state) => state.userTokens,
+  );
+  console.log(userTokens);
   const onSigned = useCallback(() => {
     if (userInfo?.idToken) {
       navigate.navigate('Home');
@@ -56,7 +64,7 @@ export const LoginScreen = () => {
   useEffect(() => {
     onSigned();
   }, [onSigned]);
-
+  // console.log(userInfo);
   return (
     <View
       style={Styles.container}
