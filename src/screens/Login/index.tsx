@@ -1,21 +1,61 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   Text, View,
 } from 'react-native';
+import {
+  GoogleSignin,
+} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+import { useUserInformation } from '@store/useUserInformation';
 import { useThemeAwareObject } from '@hooks/style/useThemeAwareObject';
 
 import { Button } from '@components/Button';
 import YoutubeLogo from '@assets/svg/YouTube-Logo.svg';
 
-import useAuthentication from '@hooks/auth/useAuthentication';
-
 import { createStyles } from './styles';
+
+import { RootStackParamListType } from '../../@types/navigation';
+
+type LoginRouteType = StackNavigationProp<
+RootStackParamListType,
+'Home'
+>;
+
+const handleSignIn = async () => {
+  await GoogleSignin.revokeAccess();
+  await GoogleSignin.signOut();
+  await GoogleSignin.hasPlayServices();
+
+  const googleUserInfo = await GoogleSignin.signIn();
+
+  const googleCredential = auth.GoogleAuthProvider.credential(googleUserInfo?.idToken);
+  auth().signInWithCredential(googleCredential);
+
+  useUserInformation.setState({ userInfo: googleUserInfo });
+
+  return googleUserInfo;
+};
 
 export const LoginScreen = () => {
   const Styles = useThemeAwareObject(createStyles);
+  const navigate = useNavigation<LoginRouteType>();
 
-  const { handleSignIn } = useAuthentication();
+  const userInfo = useUserInformation(
+    (state) => state.userInfo,
+  );
+
+  const onSigned = useCallback(() => {
+    if (userInfo?.idToken) {
+      navigate.navigate('Home');
+    }
+  }, [userInfo?.idToken, userInfo]);
+
+  useEffect(() => {
+    onSigned();
+  }, [onSigned]);
 
   return (
     <View

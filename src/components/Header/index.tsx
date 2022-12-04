@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import {
   Image,
   Text,
@@ -9,17 +9,18 @@ import {
 import { useThemeAwareObject } from '@hooks/style/useThemeAwareObject';
 import { useNavigation } from '@react-navigation/native';
 
-import JordaoVictor from '@assets/images/JordaoVictor.jpg';
 import Arrow from '@assets/svg/arrow.svg';
+
 import { WithChildren } from '../../@types/utils';
 import { createStyles } from './styles';
 
 type HeaderProps = WithChildren<{
   title?: string;
-  sourceImage?: string;
+  sourceImage?: string | undefined ;
   headerArrowTestID:string;
   headerTitleTestID:string;
   headerImageTestID:string;
+  handleArrowPress: () => void
 }>
 
 export const Header = ({
@@ -29,11 +30,15 @@ export const Header = ({
   headerArrowTestID,
   headerTitleTestID,
   headerImageTestID,
+  handleArrowPress,
 }:HeaderProps) => {
   const Styles = useThemeAwareObject(createStyles);
   const navigation = useNavigation();
 
-  const goBack = useCallback(() => { navigation.goBack(); }, [navigation]);
+  const goBack = () => {
+    handleArrowPress();
+    navigation.goBack();
+  };
 
   return (
     <View style={Styles.container}>
@@ -45,7 +50,7 @@ export const Header = ({
         <Text style={Styles.title}>{title}</Text>
       </View>
 
-      <Image testID={headerImageTestID} style={Styles.image} source={sourceImage || JordaoVictor} />
+      <Image testID={headerImageTestID} style={Styles.image} source={{ uri: sourceImage }} />
       {children}
     </View>
   );
