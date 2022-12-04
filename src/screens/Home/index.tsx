@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
 } from 'react-native';
@@ -10,6 +10,10 @@ import { Card } from '@components/Card';
 import JordaoVictor from '@assets/images/JordaoVictor.jpg';
 import { useUserInformation } from '@store/useUserInformation';
 import { User } from '@react-native-google-signin/google-signin';
+
+import { youtubeDataAPI } from '@services/apis/youtubeDataAPI';
+import { err } from 'react-native-svg/lib/typescript/xml';
+import { youtubeAnalyticsAPI } from '@services/apis/youtubeAnalyticsAPI';
 import { createStyles } from './styles';
 
 const DATA = [
@@ -55,10 +59,31 @@ const DATA = [
   },
 ];
 
+// thumbnail, total views count, total subscribers gained, likes
+
 export const HomeScreen = () => {
   const Styles = useThemeAwareObject(createStyles);
   const { userInfo } = useUserInformation();
+  useEffect(() => {
+    // fetch('https://youtubeanalytics.googleapis.com/v2/metrics').then((event) => {
+    const fetchData = async () => {
+      try {
+        // const { data } = await youtubeDataAPI.get(
+        //   '&myRating=like',
+        // );
+        //
+        const { data } = await youtubeAnalyticsAPI.get('reports?startDate=2017-01-01&metrics=views%2Ccomments%2Clikes%2Cdislikes%2CestimatedMinutesWatched%2CaverageViewDuration&endDate=2018-05-01&ids=channel%3D%3DMINE');
+        console.data({ data });
+      } catch (error) {
+        console.log('error', error);
+      }
+    };
 
+    fetchData();
+    //   const data = event.json();
+    //   console.log('data', data);
+    // }).catch((error) => { console.log('error', error); });
+  }, []);
   return (
     <View
       style={Styles.container}

@@ -26,10 +26,10 @@ module.exports = {
           '@store': './src/store',
           '@hooks': './src/hooks',
           '@types': './src/@types',
+          '@mocks': './__mocks__',
         },
       },
     ],
     'react-native-reanimated/plugin',
-
   ],
 };
