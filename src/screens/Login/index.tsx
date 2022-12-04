@@ -25,8 +25,8 @@ RootStackParamListType,
 >;
 
 const handleSignIn = async () => {
-  await GoogleSignin.revokeAccess();
-  await GoogleSignin.signOut();
+  // await GoogleSignin.revokeAccess();
+  // await GoogleSignin.signOut();
 
   await GoogleSignin.hasPlayServices();
 
