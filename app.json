@@ -1,7 +1,13 @@
 {
-  "name": "youtubeApp",
+  "name": "com.youtubeAppExemple",
   "displayName": "youtubeApp",
   "expo": {
-    "scheme": "mycoolredirect"
+    "scheme": "com.youtubeAppExemple",
+    "extra": {
+      "eas": {
+        "projectId": "10e89e0e-098e-40ca-9db4-bfb92a068066"
+        
+      }
+    }
   }
 }

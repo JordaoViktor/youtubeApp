@@ -1,8 +1,11 @@
-import React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import {
+  Platform, SafeAreaView, StatusBar, StyleSheet,
+} from 'react-native';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ReactQueryProvider from '@services/reactQuery/Provider';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { ThemeProvider } from './src/hooks/style/useTheme';
 import { Routes } from './src/routes/index.routes';
 
@@ -12,6 +15,13 @@ const styles = StyleSheet.create({
   mainWrapper: {
     flex: 1,
   },
+});
+
+const { CLIENT_ID_IOS, CLIENT_ID_ANDROID } = process.env;
+const PlatformVerification = Platform.OS === 'ios' ? CLIENT_ID_IOS : '304910963007-nikd33kkakg4vhomfom2qa3s76rgb0pe.apps.googleusercontent.com';
+
+GoogleSignin.configure({
+  webClientId: PlatformVerification,
 });
 
 const App = () => (
