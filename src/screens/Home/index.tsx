@@ -65,7 +65,6 @@ export const HomeScreen = () => {
   const Styles = useThemeAwareObject(createStyles);
   const { userInfo } = useUserInformation();
   useEffect(() => {
-    // fetch('https://youtubeanalytics.googleapis.com/v2/metrics').then((event) => {
     const fetchData = async () => {
       try {
         // const { data } = await youtubeDataAPI.get(

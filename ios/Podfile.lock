@@ -400,6 +400,8 @@ PODS:
   - RNGoogleSignin (8.2.1):
     - GoogleSignIn (~> 6.2)
     - React-Core
+  - RNInAppBrowser (3.7.0):
+    - React-Core
   - RNReanimated (2.13.0):
     - DoubleConversion
     - FBLazyVector
@@ -489,6 +491,7 @@ DEPENDENCIES:
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
+  - RNInAppBrowser (from `../node_modules/react-native-inappbrowser-reborn`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -614,6 +617,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-google-signin/google-signin"
+  RNInAppBrowser:
+    :path: "../node_modules/react-native-inappbrowser-reborn"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -688,6 +693,7 @@ SPEC CHECKSUMS:
   RNFlashList: 399bf6a0db68f594ad2c86aaff3ea39564f39f8a
   RNGestureHandler: 62232ba8f562f7dea5ba1b3383494eb5bf97a4d3
   RNGoogleSignin: 3db2d849581299f425f5b61b90cb482a9e68c7af
+  RNInAppBrowser: e36d6935517101ccba0e875bac8ad7b0cb655364
   RNReanimated: ce445c233a6ff5600223484a88ad5704945d972a
   RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
   RNSVG: 3a79c0c4992213e4f06c08e62730c5e7b9e4dc17
