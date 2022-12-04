@@ -6,6 +6,8 @@ import {
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ReactQueryProvider from '@services/reactQuery/Provider';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { NavigationContainer } from '@react-navigation/native';
+
 import { ThemeProvider } from './src/hooks/style/useTheme';
 import { Routes } from './src/routes/index.routes';
 
@@ -22,15 +24,26 @@ const PlatformVerification = Platform.OS === 'ios' ? CLIENT_ID_IOS : '3049109630
 
 GoogleSignin.configure({
   webClientId: PlatformVerification,
+  scopes: [
+    'https://www.googleapis.com/auth/youtube',
+    'https://www.googleapis.com/auth/youtube.readonly',
+    'https://www.googleapis.com/auth/yt-analytics.readonly',
+  ],
 });
 
+// eslint-disable-next-line no-undef
+if (__DEV__) {
+  import('./src/config/ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
 const App = () => (
   <GestureHandlerRootView style={{ flex: 1 }}>
     <ReactQueryProvider>
       <ThemeProvider initial={DEFAULT_LIGHT_THEME}>
         <SafeAreaView style={styles.mainWrapper}>
           <StatusBar barStyle="dark-content" />
-          <Routes />
+          <NavigationContainer>
+            <Routes />
+          </NavigationContainer>
         </SafeAreaView>
       </ThemeProvider>
     </ReactQueryProvider>
