@@ -52,9 +52,8 @@ const CardComponent = ({
       disabled={!active}
       onPress={onPress}
     >
-
       <Image
-        source={thumbnail || JordaoVictor}
+        source={{ uri: 'https://i.ytimg.com/vi/eZxMY6K9BZM/mqdefault.jpg' }}
         style={Styles.thumbnail}
         resizeMode="cover"
         testID="Card-Thumbnail"

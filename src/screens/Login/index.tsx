@@ -15,7 +15,6 @@ import { useThemeAwareObject } from '@hooks/style/useThemeAwareObject';
 import { Button } from '@components/Button';
 import YoutubeLogo from '@assets/svg/YouTube-Logo.svg';
 
-import { userInfo } from 'os';
 import { createStyles } from './styles';
 
 import { RootStackParamListType } from '../../@types/navigation';
@@ -31,7 +30,6 @@ const handleSignIn = async () => {
 
   const googleUserTokens = await GoogleSignin.getTokens();
   const googleUserInfo = await GoogleSignin.signIn();
-  // await GoogleSignin.addScopes({ scopes: ['https://www.googleapis.com/auth/youtube'] });
 
   const googleCredential = auth.GoogleAuthProvider.credential(googleUserInfo?.idToken);
   auth().signInWithCredential(googleCredential);

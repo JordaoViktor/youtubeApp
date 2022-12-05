@@ -12,9 +12,12 @@ const YOUTUBE_DATA_API_KEY = 'AIzaSyDUImMueMAvfHXE6qTBkxQHK4aYnZOG_AQ';
 const accessToken = useUserInformation.getState()?.userTokens?.accessToken;
 
 export const youtubeDataAPI = axios.create({
-  baseURL: `https://www.googleapis.com/youtube/v3/videos?key=${YOUTUBE_DATA_API_KEY}?`,
+  baseURL: `https://www.googleapis.com/youtube/v3/videos?myRating=like&part=snippet&key=${YOUTUBE_DATA_API_KEY}`,
   headers: {
     Authorization: `Bearer ${accessToken}`,
     Accept: 'application/json',
+  },
+  params: {
+    filter: 'myRating, id, chart',
   },
 });
