@@ -25,11 +25,8 @@ RootStackParamListType,
 >;
 
 const handleSignIn = async () => {
-  // await GoogleSignin.revokeAccess();
-  // await GoogleSignin.signOut();
-
-  const googleUserTokens = await GoogleSignin.getTokens();
   const googleUserInfo = await GoogleSignin.signIn();
+  const googleUserTokens = await GoogleSignin.getTokens();
 
   const googleCredential = auth.GoogleAuthProvider.credential(googleUserInfo?.idToken);
   auth().signInWithCredential(googleCredential);

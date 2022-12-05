@@ -9,8 +9,8 @@ import { useTheme } from '@hooks/style/useTheme';
 import { Header } from '@components/Header';
 import { Card } from '@components/Card';
 import JordaoVictor from '@assets/images/JordaoVictor.jpg';
-import { useUserInformation } from '@store/useUserInformation';
-import { User } from '@react-native-google-signin/google-signin';
+import { UserTokensType, useUserInformation } from '@store/useUserInformation';
+import { GoogleSignin, User } from '@react-native-google-signin/google-signin';
 
 import { youtubeDataAPI } from '@services/apis/youtubeDataAPI';
 
@@ -19,48 +19,6 @@ import { useYoutubeData, YoutubeDTOItem } from '@store/useYoutubeData';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
 import { createStyles } from './styles';
 
-const DATA = [
-  {
-    title: 'First Item herhehdsadasdsadassda',
-    thumbnail: JordaoVictor,
-    channelImage: JordaoVictor,
-  },
-  {
-    title: 'Second Item assaasdsadasdsadas',
-    thumbnail: JordaoVictor,
-    channelImage: JordaoVictor,
-  },
-  {
-    title: 'First Item herhehdsadasdsadassda',
-    thumbnail: JordaoVictor,
-    channelImage: JordaoVictor,
-  },
-  {
-    title: 'Second Item assaasdsadasdsadas',
-    thumbnail: JordaoVictor,
-    channelImage: JordaoVictor,
-  },
-  {
-    title: 'First Item herhehdsadasdsadassda',
-    thumbnail: JordaoVictor,
-    channelImage: JordaoVictor,
-  },
-  {
-    title: 'Second Item assaasdsadasdsadas',
-    thumbnail: JordaoVictor,
-    channelImage: JordaoVictor,
-  },
-  {
-    title: 'First Item herhehdsadasdsadassda',
-    thumbnail: JordaoVictor,
-    channelImage: JordaoVictor,
-  },
-  {
-    title: 'Second Item assaasdsadasdsadas',
-    thumbnail: JordaoVictor,
-    channelImage: JordaoVictor,
-  },
-];
 async function openLink(videoID:string, themeColor:string) {
   try {
     const url = `https://www.youtube.com/watch?v=${videoID}`;
@@ -98,47 +56,59 @@ async function openLink(videoID:string, themeColor:string) {
 
       Alert.alert(JSON.stringify(result));
     } else Linking.openURL(url);
-  } catch (error) {
+  } catch (error:any) {
     Alert.alert(error.message);
   }
 }
 
-// thumbnail, total views count, total subscribers gained, likes
+const handleArrowPress = async () => {
+  useUserInformation.setState({
+    userInfo: {} as User,
+    userTokens: {} as UserTokensType,
+  });
+  await GoogleSignin.revokeAccess();
+  await GoogleSignin.signOut();
+};
+
+// thumbnail,
+// total views count,
+// total subscribers gained,
+// likes
+
+const fetchData = async () => {
+  try {
+    const { data: videosInfo } = await youtubeDataAPI.get(
+      '',
+    );
+    useYoutubeData.setState(() => ({
+      youtubeData: videosInfo,
+    }));
+    console.log('videos', videosInfo);
+    const { data } = await youtubeAnalyticsAPI.get(
+      // '/reports/metrics=views%2Clikes%2Cdislikes%2CsubscribersGained&ids=channel%3D%3DMINE',
+      // 'reports?startDate=2017-01-01&metrics=metrics=views%2Clikes%2Cdislikes%2CsubscribersGained%2C&endDate=2018-05-01&ids=channel%3D%3DMINE',
+      // 'startDate=2017-01-01&metrics=views%2Ccomments%2Clikes%2Cdislikes%2CsubscribersGained&endDate=2022-05-01&ids=channel%3D%3DMINE',
+      '',
+    );
+    // console.log('data', data);
+  } catch (error) {
+    console.log('error', error);
+  }
+};
 
 export const HomeScreen = () => {
   const Styles = useThemeAwareObject(createStyles);
   const { theme } = useTheme();
   const { userInfo } = useUserInformation();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data: videosInfo } = await youtubeDataAPI.get(
-          '',
-        );
-        useYoutubeData.setState(() => ({
-          youtubeData: videosInfo,
-        }));
-        //
-        const { data } = await youtubeAnalyticsAPI.get(
-          // '/reports/metrics=views%2Clikes%2Cdislikes%2CsubscribersGained&ids=channel%3D%3DMINE',
-          // 'reports?startDate=2017-01-01&metrics=metrics=views%2Clikes%2Cdislikes%2CsubscribersGained%2C&endDate=2018-05-01&ids=channel%3D%3DMINE',
-          // 'startDate=2017-01-01&metrics=views%2Ccomments%2Clikes%2Cdislikes%2CsubscribersGained&endDate=2022-05-01&ids=channel%3D%3DMINE',
-          '',
-        );
-        console.loog('data', data);
-      } catch (error) {
-        console.log('error', error);
-      }
-    };
 
-    fetchData();
-    //   const data = event.json();
-    //   console.log('data', data);
-    // }).catch((error) => { console.log('error', error); });
-  }, []);
   const { youtubeData } = useYoutubeData();
 
-  console.log(youtubeData.items);
+  console.log('aaa', userInfo?.user?.photo);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <View
       style={Styles.container}
@@ -146,11 +116,14 @@ export const HomeScreen = () => {
       <Header
         title="My Videos"
         sourceImage={userInfo?.user?.photo || undefined}
-        handleArrowPress={() => { useUserInformation.setState({ userInfo: {} as User }); }}
+        handleArrowPress={handleArrowPress}
       />
       <View style={Styles.flatlistWrapper}>
         <FlashList
           data={youtubeData.items}
+          contentContainerStyle={{
+            paddingBottom: 70,
+          }}
           renderItem={({ item }) => {
             console.log(item.snippet.thumbnails.default.url);
             return (
@@ -160,8 +133,8 @@ export const HomeScreen = () => {
                 channelName={item.snippet.channelTitle}
                 visualizationCount="650 views"
                 timeAgo="10 minutes ago"
-                thumbnail={item.id}
-                channelImage={item.channelImage}
+                thumbnail={item?.id}
+                channelImage={item?.snippet?.channelId}
               />
             );
           }}

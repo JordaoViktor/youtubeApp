@@ -2,13 +2,10 @@ import { useUserInformation } from '@store/useUserInformation';
 import axios from 'axios';
 import { Platform } from 'react-native';
 
-export const CLIENT_ID = Platform.OS === 'ios'
-  ? '1059106940193-7sc4s86ksmtkkvvhu7m089dbk7cdfdvf.apps.googleusercontent.com'
-  : '1059106940193-jojmkdlvpppido0nt52od75j9r78c018.apps.googleusercontent.com';
+const YOUTUBE_DATA_API_KEY = Platform.OS === 'ios'
+  ? 'AIzaSyDUImMueMAvfHXE6qTBkxQHK4aYnZOG_AQ'
+  : 'AIzaSyDVj0yPK-EL-HobpFjwl2h_FcOuW0DwpV8';
 
-const YOUTUBE_DATA_API_KEY = 'AIzaSyDUImMueMAvfHXE6qTBkxQHK4aYnZOG_AQ';
-
-// AIzaSyCk4F6ADsrpKZAsFCobaLm-ChD88E2BRxY
 const accessToken = useUserInformation.getState()?.userTokens?.accessToken;
 
 export const youtubeDataAPI = axios.create({
@@ -19,5 +16,6 @@ export const youtubeDataAPI = axios.create({
   },
   params: {
     filter: 'myRating, id, chart',
+    maxResults: 10,
   },
 });
