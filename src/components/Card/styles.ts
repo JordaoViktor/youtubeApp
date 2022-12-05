@@ -17,7 +17,9 @@ export const createStyles = (theme: Theme) => {
     },
     thumbnail: {
       height: 200,
+      width: '100%',
     },
+
     channelImage: {
       backgroundColor: 'blue',
       width: 30,
@@ -26,11 +28,18 @@ export const createStyles = (theme: Theme) => {
       marginTop: 10,
       marginRight: 5,
     },
+
     channelTextsContainer: {
-      padding: 10,
+      paddingLeft: 10,
+      paddingTop: 10,
+      width: '90%',
+    },
+    channelImageWrapper: {
     },
     channelInfoWrapper: {
       flexDirection: 'row',
+      paddingHorizontal: 10,
+      width: '100%',
     },
     channelInfosContainer: {
       paddingBottom: 10,

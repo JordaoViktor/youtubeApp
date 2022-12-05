@@ -7,7 +7,7 @@ interface UseUserInformationProps {
   userTokens: UserTokensType
 }
 
-type UserTokensType = {
+export type UserTokensType = {
   idToken: string;
   accessToken: string;
 }

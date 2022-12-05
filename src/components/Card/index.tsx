@@ -4,6 +4,7 @@ import {
   ImageSourcePropType,
   StyleProp,
   Text, TouchableOpacity, View, ViewStyle,
+  Dimensions,
 } from 'react-native';
 import { useThemeAwareObject } from '@hooks/style/useThemeAwareObject';
 import JordaoVictor from '@assets/images/JordaoVictor.jpg';
@@ -21,13 +22,14 @@ type CardProps = WithChildren<{
   channelName: string;
   visualizationCount: string;
   timeAgo: string;
-  thumbnail: ImageSourcePropType;
+  thumbnail: string;
   channelImage: ImageSourcePropType;
   channelImageTestID: string;
   cardTextInfoTestID: string;
   cardTextTitleTestID:string;
 }>
 
+const screenWidth = Dimensions.get('window').width;
 const CardComponent = ({
   channelName,
   visualizationCount,
@@ -52,17 +54,18 @@ const CardComponent = ({
       disabled={!active}
       onPress={onPress}
     >
-
       <Image
-        source={thumbnail || JordaoVictor}
+        source={{ uri: `https://i.ytimg.com/vi/${thumbnail}/mqdefault.jpg` }}
         style={Styles.thumbnail}
+        width={screenWidth}
+        height={200}
         resizeMode="cover"
         testID="Card-Thumbnail"
       />
 
       <View style={Styles.channelInfoWrapper}>
-        <TouchableOpacity testID={channelImageTestID} onPress={onChannelImagePress}>
-          <Image source={channelImage || JordaoVictor} style={Styles.channelImage} resizeMode="contain" />
+        <TouchableOpacity style={Styles.channelImageWrapper} testID={channelImageTestID} onPress={onChannelImagePress}>
+          <Image source={{ uri: `https://i.ytimg.com/vi/${channelImage}/default.jpg` || JordaoVictor }} style={Styles.channelImage} resizeMode="contain" />
         </TouchableOpacity>
 
         <View style={Styles.channelTextsContainer}>
