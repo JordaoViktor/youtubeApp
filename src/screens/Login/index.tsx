@@ -35,7 +35,7 @@ const handleSignIn = async () => {
     userInfo: googleUserInfo,
     userTokens: googleUserTokens,
   });
-  console.log('haha', googleUserInfo);
+
   return googleUserInfo;
 };
 
@@ -46,10 +46,7 @@ export const LoginScreen = () => {
   const userInfo = useUserInformation(
     (state) => state.userInfo,
   );
-  const userTokens = useUserInformation(
-    (state) => state.userTokens,
-  );
-  console.log(userTokens);
+
   const onSigned = useCallback(() => {
     if (userInfo?.idToken) {
       navigate.navigate('Home');
@@ -59,7 +56,7 @@ export const LoginScreen = () => {
   useEffect(() => {
     onSigned();
   }, [onSigned]);
-  // console.log(userInfo);
+
   return (
     <View
       style={Styles.container}

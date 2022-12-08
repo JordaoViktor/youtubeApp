@@ -1,13 +1,12 @@
 import React, { memo } from 'react';
 import {
   Image,
-  ImageSourcePropType,
   StyleProp,
   Text, TouchableOpacity, View, ViewStyle,
   Dimensions,
 } from 'react-native';
+import dayjs from 'dayjs';
 import { useThemeAwareObject } from '@hooks/style/useThemeAwareObject';
-import JordaoVictor from '@assets/images/JordaoVictor.jpg';
 import { WithChildren } from '../../@types/utils';
 
 import { createStyles } from './styles';
@@ -16,20 +15,18 @@ type CardProps = WithChildren<{
   active?: boolean;
   pressableTestID?: string;
   onPress: () => void;
-  onChannelImagePress?: () => void;
   textStyle?: StyleProp<ViewStyle>;
   videoTitle: string;
   channelName: string;
-  visualizationCount: string;
+  visualizationCount: number;
   timeAgo: string;
   thumbnail: string;
-  channelImage: ImageSourcePropType;
-  channelImageTestID: string;
   cardTextInfoTestID: string;
   cardTextTitleTestID:string;
 }>
 
 const screenWidth = Dimensions.get('window').width;
+
 const CardComponent = ({
   channelName,
   visualizationCount,
@@ -38,10 +35,7 @@ const CardComponent = ({
   active,
   pressableTestID,
   onPress,
-  onChannelImagePress,
   thumbnail,
-  channelImage,
-  channelImageTestID,
   cardTextInfoTestID,
   cardTextTitleTestID,
 }: CardProps) => {
@@ -57,6 +51,7 @@ const CardComponent = ({
       <Image
         source={{ uri: `https://i.ytimg.com/vi/${thumbnail}/mqdefault.jpg` }}
         style={Styles.thumbnail}
+        // @ts-ignore
         width={screenWidth}
         height={200}
         resizeMode="cover"
@@ -64,9 +59,6 @@ const CardComponent = ({
       />
 
       <View style={Styles.channelInfoWrapper}>
-        <TouchableOpacity style={Styles.channelImageWrapper} testID={channelImageTestID} onPress={onChannelImagePress}>
-          <Image source={{ uri: `https://i.ytimg.com/vi/${channelImage}/default.jpg` || JordaoVictor }} style={Styles.channelImage} resizeMode="contain" />
-        </TouchableOpacity>
 
         <View style={Styles.channelTextsContainer}>
           <Text style={Styles.title} testID={cardTextTitleTestID}>{videoTitle}</Text>
@@ -76,8 +68,11 @@ const CardComponent = ({
               {channelName}
               •
               {visualizationCount}
+              {' '}
+
+              views
               •
-              {timeAgo}
+              {dayjs(timeAgo).fromNow()}
             </Text>
           </View>
         </View>

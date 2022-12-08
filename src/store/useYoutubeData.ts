@@ -11,7 +11,7 @@ export type YoutubeDTOItem = {
     title: string,
     description: string,
     thumbnails: {
-      (key: string): {
+      [key: string]: {
         url: string,
         width: number,
         height: number
@@ -23,6 +23,37 @@ export type YoutubeDTOItem = {
     ],
     categoryId: string
   },
+  statistics: {
+    viewCount: number;
+    likeCount:number;
+    favoriteCount:number;
+    commentCount:number
+  },
+  player:{
+    embedHtml:string
+  },
+  topicDetails:{
+    topicCategory:[string]
+  },
+  status:{
+    uploadStatus:string;
+    privacyStatus:string;
+    license:string;
+    embeddable:boolean
+    publicStatsViewable:boolean
+    madeForKids:boolean
+  },
+  contentDetails:{
+    duration:string;
+    dimension:string;
+    definition:string;
+    caption:boolean;
+    licensedContent:boolean;
+    contentRating:{};
+    projection:string;
+  },
+  recordingDetails:{}
+
 }
 
 export type YoutubeDTOType = {
@@ -34,7 +65,8 @@ export type YoutubeDTOType = {
   pageInfo:{
     totalResults: number;
     resultsPerPage: string;
-  }
+  },
+
 }
 
 interface IUseYoutubeDataProps {

@@ -38,7 +38,8 @@ export const createStyles = (theme: Theme) => {
     },
     channelInfoWrapper: {
       flexDirection: 'row',
-      paddingHorizontal: 10,
+
+      justifyContent: 'center',
       width: '100%',
     },
     channelInfosContainer: {
