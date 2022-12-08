@@ -8,14 +8,17 @@ const YOUTUBE_DATA_API_KEY = Platform.OS === 'ios'
 
 const accessToken = useUserInformation.getState()?.userTokens?.accessToken;
 
-export const youtubeDataAPI = axios.create({
-  baseURL: `https://www.googleapis.com/youtube/v3/videos?myRating=like&part=snippet&key=${YOUTUBE_DATA_API_KEY}`,
+type YoutubeDataAPIType = 'videos';
+
+export const youtubeDataAPI = (resource: YoutubeDataAPIType) => axios.create({
+  baseURL: `https://www.googleapis.com/youtube/v3/${resource}?myRating=like&part=snippet&key=${YOUTUBE_DATA_API_KEY}`,
   headers: {
     Authorization: `Bearer ${accessToken}`,
     Accept: 'application/json',
   },
   params: {
     filter: 'myRating, id, chart',
+    part: 'snippet, contentDetails, player, recordingDetails, statistics, status, topicDetails',
     maxResults: 10,
   },
 });

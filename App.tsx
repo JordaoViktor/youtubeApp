@@ -8,6 +8,8 @@ import ReactQueryProvider from '@services/reactQuery/Provider';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { NavigationContainer } from '@react-navigation/native';
 
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { ThemeProvider } from './src/hooks/style/useTheme';
 import { Routes } from './src/routes/index.routes';
 
@@ -30,11 +32,14 @@ GoogleSignin.configure({
     'https://www.googleapis.com/auth/yt-analytics.readonly',
   ],
 });
+// import AdvancedFormat from 'dayjs/plugin/advancedFormat' // ES 2015
 
+dayjs.extend(relativeTime);
 // eslint-disable-next-line no-undef
 if (__DEV__) {
   import('./src/config/ReactotronConfig').then(() => console.log('Reactotron Configured'));
 }
+
 const App = () => (
   <GestureHandlerRootView style={{ flex: 1 }}>
     <ReactQueryProvider>
