@@ -4,7 +4,7 @@
 for to run the project please follow the instructions
 
 
-![youtubeApp](https://github.com/JordaoViktor/youtubeApp/blob/main/video-exemple.mov)
+![youtubeApp](https://github.com/JordaoViktor/youtubeApp/blob/main/exemple-app.gif)
 
 ## Installation
 
