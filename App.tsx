@@ -22,7 +22,9 @@ const styles = StyleSheet.create({
 });
 
 const { CLIENT_ID_IOS } = process.env;
-const PlatformVerification = Platform.OS === 'ios' ? CLIENT_ID_IOS : '304910963007-nikd33kkakg4vhomfom2qa3s76rgb0pe.apps.googleusercontent.com';
+const PlatformVerification = Platform.OS === 'ios'
+  ? CLIENT_ID_IOS
+  : '304910963007-nikd33kkakg4vhomfom2qa3s76rgb0pe.apps.googleusercontent.com';
 
 GoogleSignin.configure({
   webClientId: PlatformVerification,

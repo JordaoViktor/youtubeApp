@@ -3,8 +3,9 @@
 
 for to run the project please follow the instructions
 
-
-![youtubeApp](https://github.com/JordaoViktor/youtubeApp/blob/main/exemple-app.gif)
+<p align="center">
+  <img src="https://github.com/JordaoViktor/youtubeApp/blob/main/exemple-app.gif" alt="animated" />
+</p>
 
 ## Installation
 
